@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return Product::all();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $p = Product::create($request->all());
+        if($p){
+            return response()->json([
+                'status' => true,
+                'data' => $p,
+                'message' => 'Product created successfully.'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'data' => "",
+            'message' => 'Gagal'
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Product $product)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Product $product)
+    {
+       $p = $product->update($request->all());
+        if($p){
+            return response()->json([
+                'status' => true,
+                'data' => $p,
+                'message' => 'Product created successfully.'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'data' => "",
+            'message' => 'Gagal'
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        $p = $product->delete();
+        if($p){
+            return response()->json([
+                'status' => true,
+                'data' => $p,
+                'message' => 'Product created successfully.'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'data' => "",
+            'message' => 'Gagal'
+        ]);
+    }
+}
